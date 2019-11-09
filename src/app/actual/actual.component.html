@@ -1,0 +1,58 @@
+<div class="container">
+    <div class="header"> <mat-toolbar>My App</mat-toolbar></div>
+    <div class="main">  
+         
+            <mat-drawer-container  style="flex: 1;" hasBackdrop="true">
+                <mat-drawer #drawer mode="push" class="leftbar">
+                    <p>Tools</p>
+                   
+                    <div>
+                            <mat-divider  ></mat-divider>
+                            <p style="margin-left: 20px;"> File Actions</p>
+                          
+                            <mat-divider  ></mat-divider>
+                            <div style="background-color: wheat;">
+
+                                <mat-card  matRipple  (click)="elementclick('input')" [matRippleColor]="myColor" class="element">Input file</mat-card>
+                                <mat-card matRipple  (click)="elementclick('output')" [matRippleColor]="myColor"class="element">Output File</mat-card>
+                                    
+                            </div>
+                        
+                        
+                    </div>
+                   
+                    
+                    <div>
+                            <mat-divider  ></mat-divider><br><br><br>
+                            <p style="margin-left: 20px; display: inline-block;"> PDF Actions</p>
+                            <mat-divider  ></mat-divider>
+                            <div style="background-color: wheat;">
+                                <mat-card  matRipple  [matRippleColor]="myColor" class="element">Merge</mat-card>
+                                <mat-card matRipple  [matRippleColor]="myColor"class="element">Split</mat-card>
+                                <mat-card matRipple [matRippleColor]="myColor" class="element">Compress</mat-card>
+                                <mat-card matRipple [matRippleColor]="myColor" class="element">Convert</mat-card>
+                            </div>
+                    </div>
+                </mat-drawer>
+                <mat-drawer-content>
+                    <button mat-icon-button color="accent" (click)="drawer.toggle()" aria-label="Example icon-button with a heart icon">
+                        <mat-icon>post_add</mat-icon>
+                      </button>
+
+                      <div>
+                          <div *ngFor="let item of selectedElements">
+                              
+                                <mat-card  [id]="item" cdkDrag matRipple (dblclick)="selectItem(item)" (click)="clickItem(item,$event)" [matRippleColor]="myColor" class="element">{{item}}</mat-card>
+                          </div>
+                            
+                      </div>
+                  
+                </mat-drawer-content>
+              </mat-drawer-container>
+              
+    </div>
+    <div class="footer"> <mat-toolbar>My App</mat-toolbar></div>
+</div>
+<button style="position:absolute;right: 15px;bottom: 30px;z-index: 1000" mat-fab color="primary">Primary</button>
+<button style="position:absolute;right: 80px;bottom: 30px;z-index: 1000" mat-fab color="primary" 
+(click)="connectNodes()">Connect</button>

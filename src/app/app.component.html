@@ -1,0 +1,79 @@
+
+<app-actual></app-actual>
+
+<!-- <mat-toolbar>Image Manager</mat-toolbar>
+
+<mat-grid-list cols="4" rowHeight="4:1" class="app-grid">
+
+  <mat-grid-tile [colspan]="4" [rowspan]="1" class="browse-files-container">
+    <ngx-file-drop class="browse-container" dropZoneLabel="Drop files here" accept="png" (onFileDrop)="dropped($event)"
+      (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+      <ng-template class="file-drop" ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+        Optional custom content that replaces the the entire default content.
+        <button mat-raised-button color="accent" type="button" (click)="openFileSelector()">Browse Files</button>
+      </ng-template>
+    </ngx-file-drop>
+  </mat-grid-tile>
+
+  <mat-grid-tile [colspan]="1" [rowspan]="5" class="files-display-container">
+    <div class="table-container"></div>
+    <div class="example-container">
+      <h4>Browsed</h4>
+
+      <div cdkDropList #browsedFilesList="cdkDropList" [cdkDropListData]="browsedFiles"
+        [cdkDropListConnectedTo]="[selectedFilesList]" class="example-list" (cdkDropListDropped)="dropFile($event)">
+        <div class="example-box" *ngFor="let item of browsedFiles" cdkDrag>{{item}}</div>
+      </div>
+    </div>
+
+  </mat-grid-tile>
+
+  <mat-grid-tile [colspan]="2" [rowspan]="4" class="files-operation-container">
+    <div class="example-container">
+      <h4>File</h4>
+
+      <div cdkDropList #selectedFilesList="cdkDropList" [cdkDropListData]="selectedFiles"
+        [cdkDropListConnectedTo]="[browsedFilesList]" class="example-list" (cdkDropListDropped)="dropFile($event)">
+        <div class="example-box" *ngFor="let item of selectedFiles" cdkDrag>{{item}}</div>
+      </div>
+    </div>
+
+
+    <div class="example-container">
+      <h4>Operation</h4>
+
+      <div cdkDropList #selectedOperationList="cdkDropList" [cdkDropListData]="selectedOperation"
+        [cdkDropListConnectedTo]="[operationsList]" class="example-list" (cdkDropListDropped)="dropOperation($event)">
+        <div class="example-box" *ngFor="let item of selectedOperation" cdkDrag>{{item}}</div>
+      </div>
+    </div>
+
+  </mat-grid-tile>
+
+
+  <mat-grid-tile [colspan]="1" [rowspan]="5" class="files-display-container">
+
+    <div class="example-container">
+      <h4>Operation List</h4>
+
+      <div cdkDropList #operationsList="cdkDropList" [cdkDropListData]="operationList"
+        [cdkDropListConnectedTo]="[selectedOperationList]" class="example-list"
+        (cdkDropListDropped)="dropOperation($event)">
+        <div class="example-box" *ngFor="let item of operationList" cdkDrag>{{item}}</div>
+      </div>
+    </div>
+
+  </mat-grid-tile>
+
+  <mat-grid-tile [colspan]="2" [rowspan]="1" class="files-management-container">
+    <mat-chip-list aria-label="process-download">
+      <mat-chip color="warn" selected>Process</mat-chip>
+      <mat-chip color="primary" selected>Download</mat-chip>
+    </mat-chip-list>
+  </mat-grid-tile>
+
+
+
+</mat-grid-list>
+
+<mat-toolbar class="footer">CC App</mat-toolbar> -->

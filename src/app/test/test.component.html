@@ -1,0 +1,40 @@
+<button onclick="$('.draggable:odd').toggle()">Toggle odd</button>
+<button onclick="$('.draggable:visible:first').remove()">Remove 1st</button>
+<br style="clear: both;" />
+<div id="draggable1" class="draggable ui-widget-content">
+    <p>Drag me around</p>
+</div>
+<div id="draggable2" class="draggable ui-widget-content">
+    <p>Drag me around</p>
+</div>
+<div id="draggable3" class="draggable ui-widget-content">
+    <p>Drag me around</p>
+    <p>Drag me around</p>
+</div>
+<br style="clear: both;" />
+<div id="draggable4" class="draggable ui-widget-content">
+    <p>Drag me around</p>
+</div>
+<div id="draggable5" class="draggable ui-widget-content">
+    <p>Drag me around</p>
+    <p>Drag me around</p>
+    <p>Drag me around</p>
+</div>
+<div id="draggable6" class="draggable ui-widget-content">
+    <p>Drag me around</p>
+</div>
+<div id="draggable7" class="draggable ui-widget-content">
+    <p>Drag me around</p>
+</div>
+
+
+
+
+<div cdkDropList  style="background-color: rebeccapurple;height: 450px;">
+    <div class="example-box" cdkDrag>
+        I can only be dragged within the dotted container
+    </div>
+</div>
+<div cdkDrop  style="background-color: beige;">
+    <p>drop here</p>
+</div>
