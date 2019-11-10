@@ -27,10 +27,10 @@
                             <p style="margin-left: 20px; display: inline-block;"> PDF Actions</p>
                             <mat-divider  ></mat-divider>
                             <div style="background-color: wheat;">
-                                <mat-card  matRipple  [matRippleColor]="myColor" class="element">Merge</mat-card>
-                                <mat-card matRipple  [matRippleColor]="myColor"class="element">Split</mat-card>
-                                <mat-card matRipple [matRippleColor]="myColor" class="element">Compress</mat-card>
-                                <mat-card matRipple [matRippleColor]="myColor" class="element">Convert</mat-card>
+                                <mat-card  matRipple (click)="elementclick('merge')" [matRippleColor]="myColor" class="element">Merge</mat-card>
+                                <mat-card matRipple (click)="elementclick('split')" [matRippleColor]="myColor"class="element">Split</mat-card>
+                                <mat-card matRipple (click)="elementclick('compress')"[matRippleColor]="myColor" class="element">Compress</mat-card>
+                                <mat-card matRipple (click)="elementclick('convert')" [matRippleColor]="myColor" class="element">Convert</mat-card>
                             </div>
                     </div>
                 </mat-drawer>
@@ -42,7 +42,9 @@
                       <div>
                           <div *ngFor="let item of selectedElements">
                               
-                                <mat-card  [id]="item" cdkDrag matRipple (dblclick)="selectItem(item)" (click)="clickItem(item,$event)" [matRippleColor]="myColor" class="element">{{item}}</mat-card>
+                                <mat-card  [id]="item.id" cdkDrag matRipple (dblclick)="selectItem(item.id)"
+                                (cdkDragReleased)="UpdateConnections()"
+                                 (click)="clickItem(item.id,$event)" [matRippleColor]="myColor" class="element">{{item.key}}</mat-card>
                           </div>
                             
                       </div>
@@ -53,6 +55,6 @@
     </div>
     <div class="footer"> <mat-toolbar>My App</mat-toolbar></div>
 </div>
-<button style="position:absolute;right: 15px;bottom: 30px;z-index: 1000" mat-fab color="primary">Primary</button>
+<button style="position:absolute;right: 15px;bottom: 30px;z-index: 1000" mat-fab color="primary" (click)="clearNodes()">Clear</button>
 <button style="position:absolute;right: 80px;bottom: 30px;z-index: 1000" mat-fab color="primary" 
 (click)="connectNodes()">Connect</button>

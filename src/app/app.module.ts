@@ -23,15 +23,18 @@ import { ActualComponent } from './actual/actual.component';
 import {MatTreeModule} from '@angular/material/tree';
 import {MatCardModule} from '@angular/material/card';
 import {MatRippleModule} from '@angular/material/core';
+import { DialogComponent } from './actual/dialog/dialog.component';
+ 
 
 @NgModule({
   declarations: [
     AppComponent,
     DialogBox,
     TestComponent,
-    ActualComponent
+    ActualComponent,
+    DialogComponent
   ],
-  entryComponents: [DialogBox],
+  entryComponents: [DialogBox,DialogComponent],
   imports: [
     BrowserModule,
     MatTreeModule,
