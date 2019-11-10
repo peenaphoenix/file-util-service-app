@@ -24,6 +24,7 @@ import {MatTreeModule} from '@angular/material/tree';
 import {MatCardModule} from '@angular/material/card';
 import {MatRippleModule} from '@angular/material/core';
 import { DialogComponent } from './actual/dialog/dialog.component';
+import { HttpClientModule } from '@angular/common/http';
  
 
 @NgModule({
@@ -41,6 +42,7 @@ import { DialogComponent } from './actual/dialog/dialog.component';
     AppRoutingModule,
     MatRippleModule,
     MatCardModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     NgxFileDropModule,
     MatToolbarModule,

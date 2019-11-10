@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
+import { OpmanagerService } from './model/opmanager.service';
+ 
 declare var jquery:any;
 declare var $ :any;
 
@@ -11,10 +13,11 @@ declare var $ :any;
 })
 export class ActualComponent implements OnInit {
   myColor = '#F9F4F3'
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog,private opsManager:OpmanagerService) { }
   _selectedElementsMap = new Map<string,any>();
 
   id = 1;
+  isFirstNode = true;
 
   selectedElements = [];
 
@@ -25,15 +28,23 @@ export class ActualComponent implements OnInit {
   ngOnInit() {
   }
 
+ 
+
   elementclick(elementkey){
     let id = elementkey+this.id;
     console.log(id);
     let element = {
       key:elementkey,
       id:id,
+      initial:this.isFirstNode,
+      connectedTo:[],
+      connectNext:[],
+      executor: this.opsManager.getOperationObject(elementkey),
       operation: this.operations.indexOf(elementkey)>-1
     }
-   
+    if(this.isFirstNode) {
+      this.isFirstNode = false;
+    }
     this.id++;
     // $('.element').draggable();
     this.checkConnections();
@@ -71,6 +82,8 @@ export class ActualComponent implements OnInit {
       'border-color':'red'
     }});
     this.addToConnectionPair(this.connectSelector[0],this.connectSelector[1]);
+    
+    
     this.connectSelector = [];
   }
 
@@ -80,12 +93,22 @@ export class ActualComponent implements OnInit {
     } else {
       this.connectionPairs.set(source,[destination]);
     }
+    this._selectedElementsMap.get(destination).connectedTo.push(this._selectedElementsMap.get(source));
+    this._selectedElementsMap.get(source).connectNext.push(this._selectedElementsMap.get(destination));
+    console.log(this._selectedElementsMap);
   }
 
   removeConnectionPair(source,destination){
     if(this.connectionPairs.has(source) && this.connectionPairs.get(source).indexOf(destination)>-1){
       this.connectionPairs.get(source).splice(this.connectionPairs.get(source).indexOf(destination),1)
     }
+    this._selectedElementsMap.get(destination).connectedTo.splice(
+      this._selectedElementsMap.get(destination).connectedTo.indexOf(this._selectedElementsMap.get(source)),1
+    );
+    this._selectedElementsMap.get(source).connectNext.splice(
+      this._selectedElementsMap.get(source).connectNext.indexOf(this._selectedElementsMap.get(destination)),1
+    );
+    console.log(this._selectedElementsMap);
   }
 
   UpdateConnections(){
@@ -138,6 +161,10 @@ export class ActualComponent implements OnInit {
   clearNodes(){
     $('*').connections('remove');
     this.connectionPairs.clear();
+    this._selectedElementsMap.forEach((value,key)=>{
+      value.connectedTo = [];
+      value.connectNext = [];
+    });
   }
 
   addElement(element){
@@ -145,6 +172,24 @@ export class ActualComponent implements OnInit {
       this.selectedElements = Array.from(this._selectedElementsMap.values());
   }
 
+
+  async process(){
+    // find the input node and traverse to first op node
+    let firstNode = Array.from(this._selectedElementsMap.values()).filter(item=>item.initial)[0];
+    let node = null;
+    if(firstNode.key === 'input'){
+      node = firstNode;
+      while(node.connectNext.length!==0){
+        node = node.connectNext[0];
+        if(node.operation){
+          await node.executor.process(node);
+        }
+      }
+    }
+    
+    // Array.from(this._selectedElementsMap.keys())
+    console.log(this._selectedElementsMap);
+  }
 
 
   checkConnections(){
